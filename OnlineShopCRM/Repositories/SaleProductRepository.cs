@@ -1,32 +1,45 @@
-﻿using OnlineShopCRM.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShopCRM.Context;
+using OnlineShopCRM.Entities;
 using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Repositories;
 
 public class SaleProductRepository : ISaleProductRepository
 {
-    public Task<int> CreateSaleProduct(SaleProduct saleProduct)
+    private readonly AppDbContext _appDbContext;
+
+    public SaleProductRepository(AppDbContext appDbContext)
     {
-        throw new NotImplementedException();
+        _appDbContext = appDbContext;
     }
 
-    public Task<SaleProduct?> GetSaleProductById(int id)
+    public async Task<int> CreateSaleProduct(SaleProduct saleProduct)
     {
-        throw new NotImplementedException();
+        _appDbContext.SaleProducts.Add(saleProduct);
+        await _appDbContext.SaveChangesAsync();
+        return saleProduct.Id;
     }
 
-    public Task<List<SaleProduct>?> GetSaleProductsByCustomerId(int customerId)
+    public async Task<SaleProduct?> GetSaleProductById(int id)
     {
-        throw new NotImplementedException();
+        return await _appDbContext.SaleProducts.FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task<List<SaleProduct>?> GetSaleProductsByCustomerId(int customerId)
+    {
+        var saleProducts = await _appDbContext.SaleProducts.Where(s => s.CustomerId == customerId).ToListAsync();
+        return saleProducts;
     }
 
     public Task<List<SaleProduct>?> GetSaleProductsByFilter(SaleProductFilter filter)
     {
-        throw new NotImplementedException();
+        return new List<SaleProduct>();
     }
 
-    public Task UpdateSaleProduct(SaleProduct saleProduct)
+    public async Task UpdateSaleProduct(SaleProduct saleProduct)
     {
-        throw new NotImplementedException();
+        _appDbContext.SaleProducts.Update(saleProduct);
+        await _appDbContext.SaveChangesAsync();
     }
 }

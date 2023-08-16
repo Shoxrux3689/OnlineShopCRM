@@ -1,27 +1,40 @@
-﻿using OnlineShopCRM.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShopCRM.Context;
+using OnlineShopCRM.Entities;
 using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Repositories;
 
 public class CutomerRepository : ICustomerRepository
 {
-    public Task<int> CreateCustomer(Customer customer)
+    private readonly AppDbContext _dbContext;
+
+    public CutomerRepository(AppDbContext dbContext)
     {
-        throw new NotImplementedException();
+        _dbContext = dbContext;
     }
 
-    public Task<List<Customer>?> GetCustomerByFilter()
+    public async Task<int> CreateCustomer(Customer customer)
     {
-        throw new NotImplementedException();
+        _dbContext.Customers.Add(customer);
+        await _dbContext.SaveChangesAsync();
+        return customer.Id;
     }
 
-    public Task<Customer?> GetCustomerById(int id)
+    public async Task<List<Customer>?> GetCustomerByFilter()
     {
-        throw new NotImplementedException();
+        return await _dbContext.Customers.ToListAsync();
     }
 
-    public Task UpdateCustomer(Customer customer)
+    public async Task<Customer?> GetCustomerById(int id)
     {
-        throw new NotImplementedException();
+        var customer = await _dbContext.Customers.FirstOrDefaultAsync(x => x.Id == id);
+        return customer;
+    }
+
+    public async Task UpdateCustomer(Customer customer)
+    {
+        _dbContext.Update(customer);
+        await _dbContext.SaveChangesAsync();
     }
 }

@@ -1,27 +1,41 @@
-﻿using OnlineShopCRM.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShopCRM.Context;
+using OnlineShopCRM.Entities;
 using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Repositories;
 
 public class InterestRepository : IInterestRepository
 {
-    public Task<int> CreateInterest(Interest interest)
+    private readonly AppDbContext _appDbContext;
+
+    public InterestRepository(AppDbContext appDbContext)
     {
-        throw new NotImplementedException();
+        _appDbContext = appDbContext;
     }
 
-    public Task<Interest?> GetInterestByCustomerId(int customerId)
+    public async Task<int> CreateInterest(Interest interest)
     {
-        throw new NotImplementedException();
+        _appDbContext.Interests.Add(interest);
+        await _appDbContext.SaveChangesAsync();
+        return interest.Id;
     }
 
-    public Task<List<Interest>?> GetInterestsByCustomerId(int customerId)
+    public async Task<Interest?> GetInterestByCustomerId(int customerId)
     {
-        throw new NotImplementedException();
+        var interest = await _appDbContext.Interests.FirstOrDefaultAsync(i => i.CustomerId == customerId);
+        return interest;
     }
 
-    public Task UpdateInterest(int id)
+    public async Task<List<Interest>?> GetInterestsByCustomerId(int customerId)
     {
-        throw new NotImplementedException();
+        var interests = await _appDbContext.Interests.Where(i => i.CustomerId == customerId).ToListAsync();
+        return interests;
+    }
+
+    public async Task UpdateInterest(Interest interest)
+    {
+        _appDbContext.Interests.Update(interest);
+        await _appDbContext.SaveChangesAsync();
     }
 }
