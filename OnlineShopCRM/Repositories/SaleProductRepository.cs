@@ -34,7 +34,7 @@ public class SaleProductRepository : ISaleProductRepository
 
     public Task<List<SaleProduct>?> GetSaleProductsByFilter(SaleProductFilter filter)
     {
-        return new List<SaleProduct>();
+        return //yozish;
     }
 
     public async Task UpdateSaleProduct(SaleProduct saleProduct)
