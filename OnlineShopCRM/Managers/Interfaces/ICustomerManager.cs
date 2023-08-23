@@ -1,6 +1,6 @@
 ﻿using OnlineShopCRM.Entities;
 using OnlineShopCRM.Filters;
-using OnlineShopCRM.Models;
+using OnlineShopCRM.Models.CustomerModels;
 
 namespace OnlineShopCRM.Managers.Interfaces;
 

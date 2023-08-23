@@ -1,4 +1,4 @@
-﻿namespace OnlineShopCRM.Models;
+﻿namespace OnlineShopCRM.Models.CustomerModels;
 
 public class UpdateCustomerModel
 {

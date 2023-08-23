@@ -1,5 +1,9 @@
-﻿namespace OnlineShopCRM.Managers;
+﻿using OnlineShopCRM.Managers.Interfaces;
 
-public class SaleProductManager
+namespace OnlineShopCRM.Managers;
+
+public class SaleProductManager : ISaleProductManager
 {
+
 }
+

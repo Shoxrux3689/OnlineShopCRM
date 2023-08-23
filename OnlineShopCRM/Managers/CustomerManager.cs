@@ -2,7 +2,7 @@
 using OnlineShopCRM.Entities;
 using OnlineShopCRM.Filters;
 using OnlineShopCRM.Managers.Interfaces;
-using OnlineShopCRM.Models;
+using OnlineShopCRM.Models.CustomerModels;
 using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Managers;

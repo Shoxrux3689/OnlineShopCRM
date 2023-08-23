@@ -1,6 +1,6 @@
 ﻿using OnlineShopCRM.Entities;
 
-namespace OnlineShopCRM.Models;
+namespace OnlineShopCRM.Models.CustomerModels;
 
 public class CreateCustomerModel
 {
