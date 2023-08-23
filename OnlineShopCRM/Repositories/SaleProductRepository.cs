@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShopCRM.Context;
 using OnlineShopCRM.Entities;
+using OnlineShopCRM.Filters;
 using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Repositories;

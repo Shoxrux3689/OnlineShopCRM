@@ -1,4 +1,5 @@
 ﻿using OnlineShopCRM.Entities;
+using OnlineShopCRM.Filters;
 
 namespace OnlineShopCRM.Repositories.Interfaces;
 
