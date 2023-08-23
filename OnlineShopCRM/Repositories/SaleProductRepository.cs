@@ -33,11 +33,35 @@ public class SaleProductRepository : ISaleProductRepository
         return saleProducts;
     }
 
-    public Task<List<SaleProduct>?> GetSaleProductsByFilter(SaleProductFilter filter)
+    public async Task<List<SaleProduct>?> GetSaleProductsByFilter(SaleProductFilter filter)
     {
-        var query = _appDbContext.SaleProducts.AsQueryable();
+        var query = _appDbContext.SaleProducts.Include(s => s.Customer).AsQueryable();
 
+        if (!string.IsNullOrWhiteSpace(filter.Name))
+            query = query.Where(s => s.Name.Contains(filter.Name));
 
+        if (!string.IsNullOrWhiteSpace(filter.CustomerPhoneNumber))
+            query = query.Where(s => s.Customer!.PhoneNumber.Contains(filter.CustomerPhoneNumber));
+
+        if (filter.FromSaleDate != null && filter.ToSaleDate != null)
+            query = query.Where(s => s.SaleDate > filter.FromSaleDate && s.SaleDate <= filter.ToSaleDate);
+        
+        if (filter.FromSaleDate != null && filter.ToSaleDate == null)
+            query = query.Where(s => s.SaleDate > filter.FromSaleDate);
+
+        if (filter.FromSaleDate == null && filter.ToSaleDate != null)
+            query = query.Where(s => s.SaleDate < filter.ToSaleDate);
+
+        if (filter.FromPrice != null && filter.ToPrice != null)
+            query = query.Where(s => s.Price > filter.FromPrice && s.Price <= filter.ToPrice);
+        
+        if (filter.FromPrice != null && filter.ToPrice == null)
+            query = query.Where(s => s.Price > filter.FromPrice);
+
+        if (filter.FromPrice == null && filter.ToPrice != null)
+            query = query.Where(s => s.Price <= filter.ToPrice);
+
+        return await query.ToListAsync();
     }
 
     public async Task UpdateSaleProduct(SaleProduct saleProduct)
