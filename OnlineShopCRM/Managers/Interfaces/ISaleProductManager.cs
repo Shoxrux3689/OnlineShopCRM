@@ -7,9 +7,8 @@ namespace OnlineShopCRM.Managers.Interfaces;
 public interface ISaleProductManager
 {
     Task CreateSaleProduct(int customerId, CreateSaleProduct createSaleProduct);
-    Task<SaleProduct?> GetSaleProduct(SaleProduct? product);
+    Task<SaleProduct?> GetSaleProduct(int saleProductId);
     Task<List<SaleProduct>?> GetSaleProductsByCustomerId(int customerId);
     Task<List<SaleProduct>?> GetSaleProductsByFilter(SaleProductFilter saleProductFilter);
-    Task UpdateSaleProduct(UpdateSaleProduct saleProduct);
-
+    Task UpdateSaleProduct(int saleProductId, UpdateSaleProduct saleProduct);
 }

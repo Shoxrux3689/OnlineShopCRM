@@ -1,5 +1,13 @@
-﻿namespace OnlineShopCRM.Filters;
+﻿using OnlineShopCRM.Entities;
+
+namespace OnlineShopCRM.Filters;
 
 public class SaleProductFilter
 {
+    public string? Name { get; set; }
+    public string? CustomerPhoneNumber { get; set; }
+    public DateOnly? FromSaleDate { get; set; }
+    public DateOnly? ToSaleDate { get; set; }
+    public long? FromPrice { get; set; }
+    public long? ToPrice { get; set; }
 }

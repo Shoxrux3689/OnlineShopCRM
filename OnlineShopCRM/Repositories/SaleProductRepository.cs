@@ -35,7 +35,9 @@ public class SaleProductRepository : ISaleProductRepository
 
     public Task<List<SaleProduct>?> GetSaleProductsByFilter(SaleProductFilter filter)
     {
-        return //yozish kerak;
+        var query = _appDbContext.SaleProducts.AsQueryable();
+
+
     }
 
     public async Task UpdateSaleProduct(SaleProduct saleProduct)

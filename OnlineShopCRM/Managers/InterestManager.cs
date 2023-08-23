@@ -1,5 +1,5 @@
 ﻿namespace OnlineShopCRM.Managers;
 
-public class InterestManager
+public class InterestManager 
 {
 }
