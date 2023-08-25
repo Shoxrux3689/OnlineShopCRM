@@ -17,10 +17,14 @@ public class InterestManager : IInterestManager
         _customerRepository = customerRepository;
     }
 
-    public Task CreateInterest(int customerId, CreateInterestModel createInterestModel)
+    public async Task CreateInterest(int customerId, CreateInterestModel createInterestModel)
     {
+        if (await _customerRepository.GetCustomerById(customerId) == null)
+            throw new Exception("Customer is not found");
+
         var interest = createInterestModel.Adapt<Interest>();
-        interest.CustomerId
+        interest.CustomerId = customerId;
+        await _interestRepository.CreateInterest(interest);
     }
 
     public Task<Interest?> GetInterestByCustomerId(int customerId)
