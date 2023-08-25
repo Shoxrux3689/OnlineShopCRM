@@ -6,8 +6,7 @@ namespace OnlineShopCRM.Managers.Interfaces;
 public interface IInterestManager
 {
     Task CreateInterest(int customerId, CreateInterestModel createInterestModel);
-    Task<Interest?> GetInterestByCustomerId(int customerId);
     Task<Interest?> GetInterestById(int interestId);
     Task<List<Interest>?> GetInterestsByCustomerId(int customerId);
-    Task UpdateInterest(int customerId, UpdateInterestModel updateInterestModel);
+    Task UpdateInterest(int interestId, UpdateInterestModel updateInterestModel);
 }

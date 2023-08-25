@@ -27,23 +27,32 @@ public class InterestManager : IInterestManager
         await _interestRepository.CreateInterest(interest);
     }
 
-    public Task<Interest?> GetInterestByCustomerId(int customerId)
-    {
-        throw new NotImplementedException();
-    }
 
     public Task<Interest?> GetInterestById(int interestId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Interest>?> GetInterestsByCustomerId(int customerId)
+    public async Task<List<Interest>?> GetInterestsByCustomerId(int customerId)
     {
-        throw new NotImplementedException();
+        if (await _customerRepository.GetCustomerById(customerId) == null)
+            throw new Exception("Customer is not found");
+
+        var interests = await _interestRepository.GetInterestsByCustomerId(customerId);
+        return interests;
     }
 
-    public Task UpdateInterest(int customerId, UpdateInterestModel updateInterestModel)
+    public async Task UpdateInterest(int interestId, UpdateInterestModel updateInterestModel)
     {
-        throw new NotImplementedException();
+        var interest = await _interestRepository.GetInterestById(interestId);
+        if (interest == null)
+            throw new Exception("Interest is not found");
+
+        interest.InterestDescription = updateInterestModel.InterestDescription;
+        interest.Date = updateInterestModel.Date;
+        interest.HashTags = updateInterestModel.HashTags;
+        interest.IsActual = updateInterestModel.IsActual;
+
+        await _interestRepository.UpdateInterest(interest);
     }
 }
