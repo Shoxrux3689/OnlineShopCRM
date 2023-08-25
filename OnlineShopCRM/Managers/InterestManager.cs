@@ -1,14 +1,26 @@
-﻿using OnlineShopCRM.Entities;
+﻿using Mapster;
+using OnlineShopCRM.Entities;
 using OnlineShopCRM.Managers.Interfaces;
 using OnlineShopCRM.Models.InterestModels;
+using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Managers;
 
 public class InterestManager : IInterestManager
 {
-    public Task CreateInterest(CreateInterestModel createInterestModel)
+    private readonly IInterestRepository _interestRepository;
+    private readonly ICustomerRepository _customerRepository;
+
+    public InterestManager(IInterestRepository interestRepository, ICustomerRepository customerRepository)
     {
-        throw new NotImplementedException();
+        _interestRepository = interestRepository;
+        _customerRepository = customerRepository;
+    }
+
+    public Task CreateInterest(int customerId, CreateInterestModel createInterestModel)
+    {
+        var interest = createInterestModel.Adapt<Interest>();
+        interest.CustomerId
     }
 
     public Task<Interest?> GetInterestByCustomerId(int customerId)
