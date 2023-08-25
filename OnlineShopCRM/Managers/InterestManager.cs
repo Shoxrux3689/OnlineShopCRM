@@ -17,7 +17,7 @@ public class InterestManager : IInterestManager
         _customerRepository = customerRepository;
     }
 
-    public async Task CreateInterest(int customerId, CreateInterestModel createInterestModel)
+    public async Task<int> CreateInterest(int customerId, CreateInterestModel createInterestModel)
     {
         if (await _customerRepository.GetCustomerById(customerId) == null)
             throw new Exception("Customer is not found");
@@ -25,6 +25,7 @@ public class InterestManager : IInterestManager
         var interest = createInterestModel.Adapt<Interest>();
         interest.CustomerId = customerId;
         await _interestRepository.CreateInterest(interest);
+        return interest.Id;
     }
 
 
