@@ -16,7 +16,7 @@ public class InterestsController : ControllerBase
         _interestManager = interestManager;
     }
 
-    [HttpGet]
+    [HttpPost]
     public async Task<IActionResult> CreateInterest(int customerId, CreateInterestModel createInterestModel)
     {
         try
