@@ -31,4 +31,8 @@ public class InterestsController : ControllerBase
     }
 
     [HttpGet]
+    public async Task<IActionResult> GetInterest()
+    {
+
+    }
 }
