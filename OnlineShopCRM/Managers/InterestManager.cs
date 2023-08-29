@@ -29,9 +29,10 @@ public class InterestManager : IInterestManager
     }
 
 
-    public Task<Interest?> GetInterestById(int interestId)
+    public async Task<Interest?> GetInterestById(int interestId)
     {
-        throw new NotImplementedException();
+        var interest = await _interestRepository.GetInterestById(interestId);
+        
     }
 
     public async Task<List<Interest>?> GetInterestsByCustomerId(int customerId)
