@@ -32,7 +32,7 @@ public class InterestManager : IInterestManager
     public async Task<Interest?> GetInterestById(int interestId)
     {
         var interest = await _interestRepository.GetInterestById(interestId);
-        
+        return interest;
     }
 
     public async Task<List<Interest>?> GetInterestsByCustomerId(int customerId)

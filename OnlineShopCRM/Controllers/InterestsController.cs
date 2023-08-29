@@ -30,9 +30,15 @@ public class InterestsController : ControllerBase
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetInterest()
+    [HttpGet("{interestId}")]
+    public async Task<IActionResult> GetInterest(int interestId)
     {
-        return Ok();
+        var interest = await _interestManager.GetInterestById(interestId);
+        if (interest == null)
+        {
+            return NotFound("Interest is not found");
+        }
+
+        return Ok(interest);
     }
 }
