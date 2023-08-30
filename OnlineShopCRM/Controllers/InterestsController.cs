@@ -41,4 +41,10 @@ public class InterestsController : ControllerBase
 
         return Ok(interest);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetInterestsByCustomerId()
+    {
+        return Ok();
+    }
 }
