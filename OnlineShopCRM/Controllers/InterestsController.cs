@@ -57,11 +57,16 @@ public class InterestsController : ControllerBase
     }
 
     [HttpPut("{interestId}")]
-    public async Task<IActionResult> UpdateInterest(int customerId, int interestId)
+    public async Task<IActionResult> UpdateInterest(int customerId, int interestId, UpdateInterestModel updateInterestModel)
     {
         try
         {
-            await _interestManager.UpdateInterest()
+            await _interestManager.UpdateInterest(customerId, interestId, updateInterestModel);
+            return Ok();
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
         }
     }
 }
