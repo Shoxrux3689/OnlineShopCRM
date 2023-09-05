@@ -43,8 +43,16 @@ public class InterestsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetInterestsByCustomerId()
+    public async Task<IActionResult> GetInterestsByCustomerId(int customerId)
     {
-        return Ok();
+        try
+        {
+            var interests = await _interestManager.GetInterestsByCustomerId(customerId);
+            return Ok(interests);
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }
