@@ -55,4 +55,13 @@ public class InterestsController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpPut("{interestId}")]
+    public async Task<IActionResult> UpdateInterest(int customerId, int interestId)
+    {
+        try
+        {
+            await _interestManager.UpdateInterest()
+        }
+    }
 }

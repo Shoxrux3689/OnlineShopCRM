@@ -44,8 +44,11 @@ public class InterestManager : IInterestManager
         return interests;
     }
 
-    public async Task UpdateInterest(int interestId, UpdateInterestModel updateInterestModel)
+    public async Task UpdateInterest(int customerId, int interestId, UpdateInterestModel updateInterestModel)
     {
+        if (await _customerRepository.GetCustomerById(customerId) == null)
+            throw new Exception("Customer is not found");
+
         var interest = await _interestRepository.GetInterestById(interestId);
         if (interest == null)
             throw new Exception("Interest is not found");
