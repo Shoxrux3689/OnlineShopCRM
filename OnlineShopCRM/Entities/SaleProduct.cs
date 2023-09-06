@@ -1,5 +1,6 @@
 ﻿namespace OnlineShopCRM.Entities;
 
+//sotilgan mahsulot
 public class SaleProduct
 {
     public int Id { get; set; }

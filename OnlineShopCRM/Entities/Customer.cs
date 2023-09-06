@@ -1,5 +1,6 @@
 ﻿namespace OnlineShopCRM.Entities;
 
+//mijoz! sotib olgan va yoki sotib olmagan
 public class Customer
 {
     public int Id { get; set; }

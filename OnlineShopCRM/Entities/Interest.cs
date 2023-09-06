@@ -1,5 +1,6 @@
 ﻿namespace OnlineShopCRM.Entities;
 
+//mijozning qiziqishlari
 public class Interest
 {
     public int Id { get; set; }

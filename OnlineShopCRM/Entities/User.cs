@@ -1,5 +1,6 @@
 ﻿namespace OnlineShopCRM.Entities;
 
+//savdogar userlar
 public class User
 {
     public int Id { get; set; }
