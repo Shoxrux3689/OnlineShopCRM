@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopCRM.Managers.Interfaces;
+using OnlineShopCRM.Models.SaleProductModels;
 
 namespace OnlineShopCRM.Controllers;
 
@@ -15,13 +16,17 @@ public class SaleProductsController : ControllerBase
         _saleProductManager = saleProductManager;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> CreateSaleProduct()
+    [HttpPost]
+    public async Task<IActionResult> CreateSaleProduct(int customerId, CreateSaleProduct createSaleProduct)
     {
         try
         {
-            await _saleProductManager.CreateSaleProduct();
+            await _saleProductManager.CreateSaleProduct(customerId, createSaleProduct);
+            return Ok();
         }
-        return
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }
