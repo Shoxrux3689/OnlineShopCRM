@@ -29,4 +29,9 @@ public class SaleProductsController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    public async Task<IActionResult> GetSaleProductById(int customerId, int saleProductId)
+    {
+
+    }
 }
