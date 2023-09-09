@@ -6,7 +6,7 @@ using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Repositories;
 
-public class SaleRepository : ISaleProductRepository
+public class SaleRepository : ISaleRepository
 {
     private readonly AppDbContext _appDbContext;
 
@@ -15,27 +15,27 @@ public class SaleRepository : ISaleProductRepository
         _appDbContext = appDbContext;
     }
 
-    public async Task<int> CreateSaleProduct(Sale saleProduct)
+    public async Task<int> CreateSale(Sale sale)
     {
-        _appDbContext.SaleProducts.Add(saleProduct);
+        _appDbContext.Sales.Add(sale);
         await _appDbContext.SaveChangesAsync();
-        return saleProduct.Id;
+        return sale.Id;
     }
 
-    public async Task<Sale?> GetSaleProductById(int id)
+    public async Task<Sale?> GetSaleById(int id)
     {
-        return await _appDbContext.SaleProducts.FirstOrDefaultAsync(x => x.Id == id);
+        return await _appDbContext.Sales.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<List<Sale>?> GetSaleProductsByCustomerId(int customerId)
+    public async Task<List<Sale>?> GetSalesByCustomerId(int customerId)
     {
-        var saleProducts = await _appDbContext.SaleProducts.Where(s => s.CustomerId == customerId).ToListAsync();
-        return saleProducts;
+        var sales = await _appDbContext.Sales.Where(s => s.CustomerId == customerId).ToListAsync();
+        return sales;
     }
 
-    public async Task<List<Sale>?> GetSaleProductsByFilter(SaleFilter filter)
+    public async Task<List<Sale>?> GetSalesByFilter(SaleFilter filter)
     {
-        var query = _appDbContext.SaleProducts.Include(s => s.Customer).AsQueryable();
+        var query = _appDbContext.Sales.Include(s => s.Customer).AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(filter.Name))
             query = query.Where(s => s.Name.Contains(filter.Name));
@@ -64,9 +64,9 @@ public class SaleRepository : ISaleProductRepository
         return await query.ToListAsync();
     }
 
-    public async Task UpdateSaleProduct(Sale saleProduct)
+    public async Task UpdateSale(Sale sale)
     {
-        _appDbContext.SaleProducts.Update(saleProduct);
+        _appDbContext.Sales.Update(sale);
         await _appDbContext.SaveChangesAsync();
     }
 }

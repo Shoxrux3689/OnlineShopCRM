@@ -5,9 +5,9 @@ namespace OnlineShopCRM.Repositories.Interfaces;
 
 public interface ISaleRepository
 {
-    public Task<int> CreateSaleProduct(Sale saleProduct);
-    public Task<Sale?> GetSaleProductById(int id);
-    public Task<List<Sale>?> GetSaleProductsByFilter(SaleFilter filter);
-    public Task<List<Sale>?> GetSaleProductsByCustomerId(int customerId);
-    public Task UpdateSaleProduct(Sale saleProduct);
+    public Task<int> CreateSale(Sale sale);
+    public Task<Sale?> GetSaleById(int id);
+    public Task<List<Sale>?> GetSalesByFilter(SaleFilter saleFilter);
+    public Task<List<Sale>?> GetSalesByCustomerId(int customerId);
+    public Task UpdateSale(Sale sale);
 }
