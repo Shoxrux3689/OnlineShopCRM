@@ -15,25 +15,25 @@ public class SaleProductRepository : ISaleProductRepository
         _appDbContext = appDbContext;
     }
 
-    public async Task<int> CreateSaleProduct(SaleProduct saleProduct)
+    public async Task<int> CreateSaleProduct(Sale saleProduct)
     {
         _appDbContext.SaleProducts.Add(saleProduct);
         await _appDbContext.SaveChangesAsync();
         return saleProduct.Id;
     }
 
-    public async Task<SaleProduct?> GetSaleProductById(int id)
+    public async Task<Sale?> GetSaleProductById(int id)
     {
         return await _appDbContext.SaleProducts.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<List<SaleProduct>?> GetSaleProductsByCustomerId(int customerId)
+    public async Task<List<Sale>?> GetSaleProductsByCustomerId(int customerId)
     {
         var saleProducts = await _appDbContext.SaleProducts.Where(s => s.CustomerId == customerId).ToListAsync();
         return saleProducts;
     }
 
-    public async Task<List<SaleProduct>?> GetSaleProductsByFilter(SaleProductFilter filter)
+    public async Task<List<Sale>?> GetSaleProductsByFilter(SaleProductFilter filter)
     {
         var query = _appDbContext.SaleProducts.Include(s => s.Customer).AsQueryable();
 
@@ -64,7 +64,7 @@ public class SaleProductRepository : ISaleProductRepository
         return await query.ToListAsync();
     }
 
-    public async Task UpdateSaleProduct(SaleProduct saleProduct)
+    public async Task UpdateSaleProduct(Sale saleProduct)
     {
         _appDbContext.SaleProducts.Update(saleProduct);
         await _appDbContext.SaveChangesAsync();

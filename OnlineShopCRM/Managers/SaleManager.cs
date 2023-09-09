@@ -7,11 +7,11 @@ using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Managers;
 
-public class SaleProductManager : ISaleProductManager
+public class SaleManager : ISaleProductManager
 {
     private readonly ISaleProductRepository _saleProductRepository;
     private readonly ICustomerRepository _customerRepository;
-    public SaleProductManager(ISaleProductRepository saleProductRepository, ICustomerRepository customerRepository)
+    public SaleManager(ISaleProductRepository saleProductRepository, ICustomerRepository customerRepository)
     {
         _saleProductRepository = saleProductRepository;
         _customerRepository = customerRepository;
@@ -22,25 +22,25 @@ public class SaleProductManager : ISaleProductManager
         if (await _customerRepository.GetCustomerById(customerId) == null)
             throw new Exception("Customer is not found");
 
-        var saleProduct = createSaleProduct.Adapt<SaleProduct>();
+        var saleProduct = createSaleProduct.Adapt<Sale>();
         saleProduct.CustomerId = customerId;
         
         await _saleProductRepository.CreateSaleProduct(saleProduct);
     }
 
-    public async Task<SaleProduct?> GetSaleProduct(int saleProductId)
+    public async Task<Sale?> GetSaleProduct(int saleProductId)
     {
         var saleProduct = await _saleProductRepository.GetSaleProductById(saleProductId);
         return saleProduct;
     }
 
-    public async Task<List<SaleProduct>?> GetSaleProductsByCustomerId(int customerId)
+    public async Task<List<Sale>?> GetSaleProductsByCustomerId(int customerId)
     {
         var saleProducts = await _saleProductRepository.GetSaleProductsByCustomerId(customerId);
         return saleProducts;
     }
 
-    public async Task<List<SaleProduct>?> GetSaleProductsByFilter(SaleProductFilter saleProductFilter)
+    public async Task<List<Sale>?> GetSaleProductsByFilter(SaleProductFilter saleProductFilter)
     {
         var saleProducts = await _saleProductRepository.GetSaleProductsByFilter(saleProductFilter);
         return saleProducts;

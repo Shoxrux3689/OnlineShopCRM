@@ -1,8 +1,8 @@
 ﻿using OnlineShopCRM.Entities;
 
-namespace OnlineShopCRM.Models.SaleProductModels;
+namespace OnlineShopCRM.Models.SaleModels;
 
-public class CreateSaleProduct
+public class CreateSale
 {
     public required string Name { get; set; }
     public int CustomerId { get; set; }

@@ -1,7 +1,7 @@
 ﻿namespace OnlineShopCRM.Entities;
 
 //sotilgan mahsulot
-public class SaleProduct
+public class Sale
 {
     public int Id { get; set; }
     public required string Name { get; set; }
