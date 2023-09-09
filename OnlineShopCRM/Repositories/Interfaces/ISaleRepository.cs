@@ -3,7 +3,7 @@ using OnlineShopCRM.Filters;
 
 namespace OnlineShopCRM.Repositories.Interfaces;
 
-public interface ISaleProductRepository
+public interface ISaleRepository
 {
     public Task<int> CreateSaleProduct(Sale saleProduct);
     public Task<Sale?> GetSaleProductById(int id);
