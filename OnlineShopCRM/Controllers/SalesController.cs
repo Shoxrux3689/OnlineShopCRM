@@ -32,6 +32,12 @@ public class SalesController : ControllerBase
 
     public async Task<IActionResult> GetSaleById(int customerId, int saleId)
     {
-        return Ok();
+        var sale = await _saleManager.GetSaleById(saleId);
+        if (sale == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(sale);
     }
 }

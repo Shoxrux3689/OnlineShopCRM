@@ -28,7 +28,7 @@ public class SaleManager : ISaleManager
         await _saleRepository.CreateSale(sale);
     }
 
-    public async Task<Sale?> GetSale(int saleId)
+    public async Task<Sale?> GetSaleById(int saleId)
     {
         var sale = await _saleRepository.GetSaleById(saleId);
         return sale;
