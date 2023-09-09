@@ -2,61 +2,61 @@
 using OnlineShopCRM.Entities;
 using OnlineShopCRM.Filters;
 using OnlineShopCRM.Managers.Interfaces;
-using OnlineShopCRM.Models.SaleProductModels;
+using OnlineShopCRM.Models.SaleModels;
 using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Managers;
 
-public class SaleManager : ISaleProductManager
+public class SaleManager : ISaleManager
 {
-    private readonly ISaleProductRepository _saleProductRepository;
+    private readonly ISaleRepository _saleRepository;
     private readonly ICustomerRepository _customerRepository;
-    public SaleManager(ISaleProductRepository saleProductRepository, ICustomerRepository customerRepository)
+    public SaleManager(ISaleRepository saleRepository, ICustomerRepository customerRepository)
     {
-        _saleProductRepository = saleProductRepository;
+        _saleRepository = saleRepository;
         _customerRepository = customerRepository;
     }
 
-    public async Task CreateSaleProduct(int customerId, CreateSaleProduct createSaleProduct)
+    public async Task CreateSale(int customerId, CreateSale createSale)
     {
         if (await _customerRepository.GetCustomerById(customerId) == null)
             throw new Exception("Customer is not found");
 
-        var saleProduct = createSaleProduct.Adapt<Sale>();
-        saleProduct.CustomerId = customerId;
+        var sale = createSale.Adapt<Sale>();
+        sale.CustomerId = customerId;
         
-        await _saleProductRepository.CreateSaleProduct(saleProduct);
+        await _saleRepository.CreateSale(sale);
     }
 
-    public async Task<Sale?> GetSaleProduct(int saleProductId)
+    public async Task<Sale?> GetSale(int saleId)
     {
-        var saleProduct = await _saleProductRepository.GetSaleProductById(saleProductId);
-        return saleProduct;
+        var sale = await _saleRepository.GetSaleById(saleId);
+        return sale;
     }
 
-    public async Task<List<Sale>?> GetSaleProductsByCustomerId(int customerId)
+    public async Task<List<Sale>?> GetSalesByCustomerId(int customerId)
     {
-        var saleProducts = await _saleProductRepository.GetSaleProductsByCustomerId(customerId);
-        return saleProducts;
+        var sales = await _saleRepository.GetSalesByCustomerId(customerId);
+        return sales;
     }
 
-    public async Task<List<Sale>?> GetSaleProductsByFilter(SaleProductFilter saleProductFilter)
+    public async Task<List<Sale>?> GetSalesByFilter(SaleFilter saleFilter)
     {
-        var saleProducts = await _saleProductRepository.GetSaleProductsByFilter(saleProductFilter);
-        return saleProducts;
+        var sales = await _saleRepository.GetSalesByFilter(saleFilter);
+        return sales;
     }
 
-    public async Task UpdateSaleProduct(int saleProductId, UpdateSaleProduct updateSaleProduct)
+    public async Task UpdateSale(int saleId, UpdateSale updateSale)
     {
-        var saleProduct = await _saleProductRepository.GetSaleProductById(saleProductId);
-        if (saleProduct == null) 
-            throw new Exception("SaleProduct is not found");
+        var sale = await _saleRepository.GetSaleById(saleId);
+        if (sale == null) 
+            throw new Exception("Sale is not found");
         
-        saleProduct.SaleDate = updateSaleProduct.SaleDate;
-        saleProduct.Price = updateSaleProduct.Price;
-        saleProduct.Name = updateSaleProduct.Name;
+        sale.SaleDate = updateSale.SaleDate;
+        sale.Price = updateSale.Price;
+        sale.Name = updateSale.Name;
 
-        await _saleProductRepository.UpdateSaleProduct(saleProduct);
+        await _saleRepository.UpdateSale(sale);
     }
 }
 

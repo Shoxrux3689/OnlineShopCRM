@@ -33,7 +33,7 @@ public class SaleProductRepository : ISaleProductRepository
         return saleProducts;
     }
 
-    public async Task<List<Sale>?> GetSaleProductsByFilter(SaleProductFilter filter)
+    public async Task<List<Sale>?> GetSaleProductsByFilter(SaleFilter filter)
     {
         var query = _appDbContext.SaleProducts.Include(s => s.Customer).AsQueryable();
 

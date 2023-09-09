@@ -2,7 +2,7 @@
 
 namespace OnlineShopCRM.Filters;
 
-public class SaleProductFilter
+public class SaleFilter
 {
     public string? Name { get; set; }
     public string? CustomerPhoneNumber { get; set; }
