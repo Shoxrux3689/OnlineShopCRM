@@ -21,7 +21,7 @@ public class InterestRepository : IInterestRepository
         return interest.Id;
     }
 
-    public async Task<Interest?> GetInterestByCustomerId(int customerId)
+    public async Task<Interest?> GetInterestById(int customerId)
     {
         var interest = await _appDbContext.Interests.FirstOrDefaultAsync(i => i.CustomerId == customerId);
         return interest;

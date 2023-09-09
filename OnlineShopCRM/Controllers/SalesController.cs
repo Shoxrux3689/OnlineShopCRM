@@ -32,6 +32,6 @@ public class SalesController : ControllerBase
 
     public async Task<IActionResult> GetSaleById(int customerId, int saleId)
     {
-
+        return Ok();
     }
 }
