@@ -51,13 +51,26 @@ public class SalesController : ControllerBase
         return Ok(sales);
     }
 
-    [HttpGet]
+    [HttpGet("filter")]
     public async Task<IActionResult> GetSalesByFilter(SaleFilter saleFilter)
     {
         try
         {
             var sales = await _saleManager.GetSalesByFilter(saleFilter);
             return Ok(sales);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    public async Task<IActionResult> UpdateSale(int customerId, UpdateSale updateSale)
+    {
+        try
+        {
+            await _saleManager.UpdateSale(customerId, updateSale);
+            return Ok();
         }
         catch (Exception ex)
         {
