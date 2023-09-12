@@ -46,7 +46,7 @@ public class SaleManager : ISaleManager
         return sales;
     }
 
-    public async Task UpdateSale(int saleId, UpdateSale updateSale)
+    public async Task UpdateSale(int customerId, int saleId, UpdateSale updateSale)
     {
         var sale = await _saleRepository.GetSaleById(saleId);
         if (sale == null) 

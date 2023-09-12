@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineShopCRM.Context;
+using OnlineShopCRM.Managers;
+using OnlineShopCRM.Managers.Interfaces;
+using OnlineShopCRM.Repositories;
+using OnlineShopCRM.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +16,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"));
 });
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerManager, CustomerManager>();
+builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+builder.Services.AddScoped<ISaleManager, SaleManager>();
+builder.Services.AddScoped<IInterestRepository, InterestRepository>();
+builder.Services.AddScoped<IInterestManager, InterestManager>();
 
 var app = builder.Build();
 

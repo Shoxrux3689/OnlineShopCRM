@@ -10,5 +10,5 @@ public interface ISaleManager
     Task<Sale?> GetSaleById(int saleId);
     Task<List<Sale>?> GetSalesByCustomerId(int customerId);
     Task<List<Sale>?> GetSalesByFilter(SaleFilter saleFilter);
-    Task UpdateSale(int saleId, UpdateSale sale);
+    Task UpdateSale(int customerId, int saleId, UpdateSale sale);
 }

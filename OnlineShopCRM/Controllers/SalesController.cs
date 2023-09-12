@@ -65,11 +65,12 @@ public class SalesController : ControllerBase
         }
     }
 
-    public async Task<IActionResult> UpdateSale(int customerId, UpdateSale updateSale)
+    [HttpPut("{saleId}")]
+    public async Task<IActionResult> UpdateSale(int customerId, int saleId, UpdateSale updateSale)
     {
         try
         {
-            await _saleManager.UpdateSale(customerId, updateSale);
+            await _saleManager.UpdateSale(customerId, saleId, updateSale);
             return Ok();
         }
         catch (Exception ex)
