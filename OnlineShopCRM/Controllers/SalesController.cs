@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShopCRM.Filters;
 using OnlineShopCRM.Managers.Interfaces;
 using OnlineShopCRM.Models.SaleModels;
 
@@ -30,6 +31,7 @@ public class SalesController : ControllerBase
         }
     }
 
+    [HttpGet("{saleId}")]
     public async Task<IActionResult> GetSaleById(int customerId, int saleId)
     {
         var sale = await _saleManager.GetSaleById(saleId);
@@ -39,5 +41,19 @@ public class SalesController : ControllerBase
         }
 
         return Ok(sale);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetSalesByCustomerId(int customerId)
+    {
+        var sales = await _saleManager.GetSalesByCustomerId(customerId);
+
+        return Ok(sales);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetSalesByFilter(SaleFilter saleFilter)
+    {
+
     }
 }
