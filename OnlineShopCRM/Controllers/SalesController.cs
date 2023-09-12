@@ -54,6 +54,14 @@ public class SalesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetSalesByFilter(SaleFilter saleFilter)
     {
-
+        try
+        {
+            var sales = await _saleManager.GetSalesByFilter(saleFilter);
+            return Ok(sales);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }
