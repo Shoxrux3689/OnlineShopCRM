@@ -33,13 +33,13 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetCustomers(CustomerFilter customerFilter)
+    public async Task<IActionResult> GetCustomers([FromQuery] CustomerFilter customerFilter)
     {
         var customers = await _customerManager.GetCustomers(customerFilter);
         return Ok(customers);
     }
 
-    [HttpGet]
+    [HttpGet("{customerId}")]
     public async Task<IActionResult> GetCustomer(int customerId)
     {
         var customer = await _customerManager.GetCustomer(customerId);
