@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using OnlineShopCRM.Options;
 
 namespace OnlineShopCRM.Extensions;
@@ -27,5 +28,35 @@ public static class ServiceCollectionExtensions
                     ClockSkew = TimeSpan.Zero
                 };
             });
+    }
+
+    public static void AddSwaggerGenJwt(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+            {
+                Description = @"Jwt Bearer. : Authorization: Bearer {token}",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey
+            });
+
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+
+                    new List<string>()
+                }
+            });
+        });
     }
 }
