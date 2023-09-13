@@ -4,5 +4,5 @@ namespace OnlineShopCRM.Managers.Interfaces;
 
 public interface ITokenManager
 {
-    string GetToken(User user);
+    string GenerateToken(User user);
 }

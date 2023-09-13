@@ -22,9 +22,16 @@ public class UserRepository : IUserRepository
         return user.Id;
     }
 
-    public async Task<User?> GetUser(int userId)
+    public async Task<User?> GetUserById(int userId)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+        return user;
+    }
+
+    public async Task<User?> GetUserByUsername(string username)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
 
         return user;
     }

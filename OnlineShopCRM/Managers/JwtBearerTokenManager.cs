@@ -17,7 +17,7 @@ public class JwtBearerTokenManager : ITokenManager
         _jwtOption = jwtOption.Value;
     }
 
-    public string GetToken(User user)
+    public string GenerateToken(User user)
     {
         var claims = new List<Claim>()
         {

@@ -6,6 +6,6 @@ namespace OnlineShopCRM.Managers.Interfaces;
 public interface IUserManager
 {
     Task<int> Registration(CreateUserModel createUserModel);
-    Task<User> Login(LoginUserModel loginUserModel);
+    Task<string> Login(LoginUserModel loginUserModel);
     Task UpdateUser(UpdateUserModel updateUserModel);
 }
