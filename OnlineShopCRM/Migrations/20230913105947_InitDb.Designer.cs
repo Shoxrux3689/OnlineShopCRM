@@ -12,7 +12,7 @@ using OnlineShopCRM.Context;
 namespace OnlineShopCRM.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230912182032_InitDb")]
+    [Migration("20230913105947_InitDb")]
     partial class InitDb
     {
         /// <inheritdoc />
@@ -46,7 +46,12 @@ namespace OnlineShopCRM.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Customers");
                 });
@@ -111,6 +116,42 @@ namespace OnlineShopCRM.Migrations
                     b.ToTable("Sales");
                 });
 
+            modelBuilder.Entity("OnlineShopCRM.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("OnlineShopCRM.Entities.Customer", b =>
+                {
+                    b.HasOne("OnlineShopCRM.Entities.User", "User")
+                        .WithMany("Customers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("OnlineShopCRM.Entities.Interest", b =>
                 {
                     b.HasOne("OnlineShopCRM.Entities.Customer", "Customer")
@@ -138,6 +179,11 @@ namespace OnlineShopCRM.Migrations
                     b.Navigation("Interests");
 
                     b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("OnlineShopCRM.Entities.User", b =>
+                {
+                    b.Navigation("Customers");
                 });
 #pragma warning restore 612, 618
         }

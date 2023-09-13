@@ -3,6 +3,7 @@ using OnlineShopCRM.Context;
 using OnlineShopCRM.Extensions;
 using OnlineShopCRM.Managers;
 using OnlineShopCRM.Managers.Interfaces;
+using OnlineShopCRM.Providers;
 using OnlineShopCRM.Repositories;
 using OnlineShopCRM.Repositories.Interfaces;
 
@@ -26,6 +27,8 @@ builder.Services.AddScoped<ISaleManager, SaleManager>();
 builder.Services.AddScoped<IInterestRepository, InterestRepository>();
 builder.Services.AddScoped<IInterestManager, InterestManager>();
 builder.Services.AddScoped<ITokenManager, JwtBearerTokenManager>();
+builder.Services.AddScoped<IUserProvider, UserProvider>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddJwt(builder.Configuration);
 builder.Services.AddSwaggerGenJwt();

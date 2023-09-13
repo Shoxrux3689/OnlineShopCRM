@@ -3,6 +3,7 @@ using OnlineShopCRM.Entities;
 using OnlineShopCRM.Filters;
 using OnlineShopCRM.Managers.Interfaces;
 using OnlineShopCRM.Models.CustomerModels;
+using OnlineShopCRM.Providers;
 using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Managers;
@@ -10,15 +11,18 @@ namespace OnlineShopCRM.Managers;
 public class CustomerManager : ICustomerManager
 {
     private readonly ICustomerRepository _customerRepository;
+    private readonly IUserProvider _userProvider;
 
-    public CustomerManager(ICustomerRepository customerRepository)
+    public CustomerManager(ICustomerRepository customerRepository, IUserProvider userProvider)
     {
         _customerRepository = customerRepository;
+        _userProvider = userProvider;
     }
 
     public async Task<int> CreateCustomer(CreateCustomerModel createCustomer)
     {
         var customer = createCustomer.Adapt<Customer>();
+        customer.UserId = _userProvider.UserId;
         var customerId = await _customerRepository.CreateCustomer(customer);
         return customerId;
     }

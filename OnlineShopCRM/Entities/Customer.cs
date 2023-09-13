@@ -8,6 +8,8 @@ public class Customer
     public string? LastName { get; set; }
     public string? Address { get; set; }
     public required string PhoneNumber { get; set; }
+    public User? User { get; set; }
+    public int UserId { get; set; }
     public List<Sale>? Sales { get; set; }
     public List<Interest>? Interests { get; set; }
 }
