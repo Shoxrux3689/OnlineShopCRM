@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineShopCRM.Context;
+using OnlineShopCRM.Extensions;
 using OnlineShopCRM.Managers;
 using OnlineShopCRM.Managers.Interfaces;
 using OnlineShopCRM.Repositories;
@@ -14,6 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
+    AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     options.UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"));
 });
 
@@ -23,6 +25,10 @@ builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<ISaleManager, SaleManager>();
 builder.Services.AddScoped<IInterestRepository, InterestRepository>();
 builder.Services.AddScoped<IInterestManager, InterestManager>();
+builder.Services.AddScoped<ITokenManager, JwtBearerTokenManager>();
+
+builder.Services.AddJwt(builder.Configuration);
+builder.Services.AddSwaggerGenJwt();
 
 var app = builder.Build();
 
@@ -34,8 +40,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+app.MigrateAppDb();
