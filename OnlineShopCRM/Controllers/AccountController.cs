@@ -18,7 +18,7 @@ public class AccountController : ControllerBase
         _userManager = userManager;
     }
 
-    [HttpGet("register")]
+    [HttpPost("register")]
     public async Task<IActionResult> Registration(CreateUserModel createUserModel)
     {
         try
@@ -32,7 +32,7 @@ public class AccountController : ControllerBase
         }
     }
 
-    [HttpGet("login")]
+    [HttpPost("login")]
     public async Task<IActionResult> Login(LoginUserModel loginUserModel)
     {
         try
@@ -47,7 +47,7 @@ public class AccountController : ControllerBase
     }
 
     [Authorize]
-    [HttpGet("profile")]
+    [HttpGet]
     public async Task<IActionResult> Profile()
     {
         try
