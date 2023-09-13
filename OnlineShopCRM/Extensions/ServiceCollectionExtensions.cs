@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using OnlineShopCRM.Context;
 using OnlineShopCRM.Options;
 
 namespace OnlineShopCRM.Extensions;
@@ -28,6 +30,15 @@ public static class ServiceCollectionExtensions
                     ClockSkew = TimeSpan.Zero
                 };
             });
+    }
+
+    public static void MigrateAppDb(this WebApplication app)
+    {
+        if (app.Services.GetService<AppDbContext>() == null)
+            return;
+
+        var appDb = app.Services.GetRequiredService<AppDbContext>();
+        appDb.Database.Migrate();
     }
 
     public static void AddSwaggerGenJwt(this IServiceCollection services)
