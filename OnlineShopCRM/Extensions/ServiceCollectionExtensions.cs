@@ -32,6 +32,7 @@ public static class ServiceCollectionExtensions
             });
     }
 
+    //shuni qaytadan korib chiqishim kerak shubha bor
     public static void MigrateAppDb(this WebApplication app)
     {
         if (app.Services.GetService<AppDbContext>() == null)
