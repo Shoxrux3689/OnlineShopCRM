@@ -51,5 +51,6 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> Profile()
     {
         //httpcontext dan id sini olish kere
+
     }
 }
