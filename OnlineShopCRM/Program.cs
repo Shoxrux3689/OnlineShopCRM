@@ -27,6 +27,8 @@ builder.Services.AddScoped<ISaleManager, SaleManager>();
 builder.Services.AddScoped<IInterestRepository, InterestRepository>();
 builder.Services.AddScoped<IInterestManager, InterestManager>();
 builder.Services.AddScoped<ITokenManager, JwtBearerTokenManager>();
+builder.Services.AddScoped<IUserManager, UserManager>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserProvider, UserProvider>();
 builder.Services.AddHttpContextAccessor();
 
