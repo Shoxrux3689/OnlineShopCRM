@@ -8,4 +8,5 @@ public interface IUserManager
     Task<int> Registration(CreateUserModel createUserModel);
     Task<string> Login(LoginUserModel loginUserModel);
     Task UpdateUser(UpdateUserModel updateUserModel);
+    Task<User> Profile();
 }

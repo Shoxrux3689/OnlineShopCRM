@@ -50,7 +50,14 @@ public class AccountController : ControllerBase
     [HttpGet("profile")]
     public async Task<IActionResult> Profile()
     {
-        //httpcontext dan id sini olish kere
-
+        try
+        {
+            var user = await _userManager.Profile();
+            return Ok(user);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }
