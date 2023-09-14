@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopCRM.Filters;
 using OnlineShopCRM.Managers.Interfaces;
@@ -6,6 +7,7 @@ using OnlineShopCRM.Models.SaleModels;
 
 namespace OnlineShopCRM.Controllers;
 
+[Authorize]
 [Route("api/customers/{customerId}/[controller]")]
 [ApiController]
 public class SalesController : ControllerBase

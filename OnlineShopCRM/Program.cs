@@ -17,7 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-    options.UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"));
+    options.UseInMemoryDatabase("MyDb");
+    //options.UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"));
 });
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();

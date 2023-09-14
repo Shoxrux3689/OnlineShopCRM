@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopCRM.Managers.Interfaces;
 using OnlineShopCRM.Models.InterestModels;
 
 namespace OnlineShopCRM.Controllers;
 
+[Authorize]
 [Route("api/customers/{customerId}/[controller]")]
 [ApiController]
 public class InterestsController : ControllerBase
