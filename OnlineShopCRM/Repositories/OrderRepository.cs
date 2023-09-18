@@ -33,7 +33,7 @@ public class OrderRepository : IOrderRepository
         return sales;
     }
 
-    public async Task<List<Sale>?> GetSalesByFilter(SaleFilter filter)
+    public async Task<List<Sale>?> GetSalesByFilter(OrderFilter filter)
     {
         var query = _appDbContext.Sales.Include(s => s.Customer).AsQueryable();
 
