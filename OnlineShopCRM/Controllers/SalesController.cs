@@ -12,9 +12,9 @@ namespace OnlineShopCRM.Controllers;
 [ApiController]
 public class SalesController : ControllerBase
 {
-    private readonly ISaleManager _saleManager;
+    private readonly IOrderManager _saleManager;
 
-    public SalesController(ISaleManager saleManager)
+    public SalesController(IOrderManager saleManager)
     {
         _saleManager = saleManager;
     }

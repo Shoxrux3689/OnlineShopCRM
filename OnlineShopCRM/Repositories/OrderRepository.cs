@@ -6,11 +6,11 @@ using OnlineShopCRM.Repositories.Interfaces;
 
 namespace OnlineShopCRM.Repositories;
 
-public class SaleRepository : ISaleRepository
+public class OrderRepository : IOrderRepository
 {
     private readonly AppDbContext _appDbContext;
 
-    public SaleRepository(AppDbContext appDbContext)
+    public OrderRepository(AppDbContext appDbContext)
     {
         _appDbContext = appDbContext;
     }

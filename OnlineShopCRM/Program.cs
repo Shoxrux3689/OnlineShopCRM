@@ -24,7 +24,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerManager, CustomerManager>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
-builder.Services.AddScoped<ISaleManager, SaleManager>();
+builder.Services.AddScoped<IOrderManager, OrderManager>();
 builder.Services.AddScoped<IInterestRepository, InterestRepository>();
 builder.Services.AddScoped<IInterestManager, InterestManager>();
 builder.Services.AddScoped<ITokenManager, JwtBearerTokenManager>();
