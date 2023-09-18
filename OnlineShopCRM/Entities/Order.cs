@@ -7,7 +7,9 @@ public class Order
     public Customer? Customer { get; set; }
     public bool IsActive { get; set; }
     public bool IsPay { get; set; }
-    public int Price { get; set; }
-    public DateOnly OrderDate { get; set; }
-    public 
+    public bool IsCancel { get; set; }
+    public long Residual { get; set; }
+    public required DateOnly OrderDate { get; set; }
+    public Product? Product { get; set; }
+    public int ProductId { get; set; }
 }

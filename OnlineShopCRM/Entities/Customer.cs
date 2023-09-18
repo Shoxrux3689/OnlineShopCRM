@@ -12,4 +12,5 @@ public class Customer
     public int UserId { get; set; }
     public List<Sale>? Sales { get; set; }
     public List<Interest>? Interests { get; set; }
+    public List<Order>? Orders { get; set;}
 }
