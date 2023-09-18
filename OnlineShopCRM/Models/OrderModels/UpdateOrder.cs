@@ -1,8 +1,8 @@
 ﻿using OnlineShopCRM.Entities;
 
-namespace OnlineShopCRM.Models.SaleModels;
+namespace OnlineShopCRM.Models.OrderModels;
 
-public class UpdateSale
+public class UpdateOrder
 {
     public required string Name { get; set; }
     public required DateOnly SaleDate { get; set; }
