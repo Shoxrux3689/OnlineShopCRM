@@ -15,27 +15,27 @@ public class OrderRepository : IOrderRepository
         _appDbContext = appDbContext;
     }
 
-    public async Task<int> CreateSale(Sale sale)
+    public async Task<int> CreateOrder(Order order)
     {
-        _appDbContext.Sales.Add(sale);
+        _appDbContext.Orders.Add(order);
         await _appDbContext.SaveChangesAsync();
-        return sale.Id;
+        return order.Id;
     }
 
-    public async Task<Sale?> GetSaleById(int id)
+    public async Task<Order?> GetOrderById(int id)
     {
-        return await _appDbContext.Sales.FirstOrDefaultAsync(x => x.Id == id);
+        return await _appDbContext.Orders.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<List<Sale>?> GetSalesByCustomerId(int customerId)
+    public async Task<List<Order>?> GetOrdersByCustomerId(int customerId)
     {
-        var sales = await _appDbContext.Sales.Where(s => s.CustomerId == customerId).ToListAsync();
-        return sales;
+        var orders = await _appDbContext.Orders.Where(s => s.CustomerId == customerId).ToListAsync();
+        return orders;
     }
 
-    public async Task<List<Sale>?> GetSalesByFilter(OrderFilter filter)
+    public async Task<List<Order>?> GetOrdersByFilter(OrderFilter filter)
     {
-        var query = _appDbContext.Sales.Include(s => s.Customer).AsQueryable();
+        var query = _appDbContext.Orders.Include(s => s.Customer).AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(filter.Name))
             query = query.Where(s => s.Name.Contains(filter.Name));
@@ -43,14 +43,14 @@ public class OrderRepository : IOrderRepository
         if (!string.IsNullOrWhiteSpace(filter.CustomerPhoneNumber))
             query = query.Where(s => s.Customer!.PhoneNumber.Contains(filter.CustomerPhoneNumber));
 
-        if (filter.FromSaleDate != null && filter.ToSaleDate != null)
-            query = query.Where(s => s.SaleDate > filter.FromSaleDate && s.SaleDate <= filter.ToSaleDate);
+        if (filter.FromDate != null && filter.ToDate != null)
+            query = query.Where(s => s.OrderDate > filter.FromDate && s.OrderDate <= filter.ToDate);
         
-        if (filter.FromSaleDate != null && filter.ToSaleDate == null)
-            query = query.Where(s => s.SaleDate > filter.FromSaleDate);
+        if (filter.FromDate != null && filter.ToDate == null)
+            query = query.Where(s => s.OrderDate > filter.FromDate);
 
-        if (filter.FromSaleDate == null && filter.ToSaleDate != null)
-            query = query.Where(s => s.SaleDate < filter.ToSaleDate);
+        if (filter.FromDate == null && filter.ToDate != null)
+            query = query.Where(s => s.OrderDate < filter.ToDate);
 
         if (filter.FromPrice != null && filter.ToPrice != null)
             query = query.Where(s => s.Price > filter.FromPrice && s.Price <= filter.ToPrice);
@@ -64,9 +64,9 @@ public class OrderRepository : IOrderRepository
         return await query.ToListAsync();
     }
 
-    public async Task UpdateSale(Sale sale)
+    public async Task UpdateOrder(Order Order)
     {
-        _appDbContext.Sales.Update(sale);
+        _appDbContext.Orders.Update(Order);
         await _appDbContext.SaveChangesAsync();
     }
 }
