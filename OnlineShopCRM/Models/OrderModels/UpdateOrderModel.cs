@@ -2,7 +2,7 @@
 
 namespace OnlineShopCRM.Models.OrderModels;
 
-public class UpdateOrder
+public class UpdateOrderModel
 {
     public bool IsActive { get; set; }
     public bool IsPay { get; set; }

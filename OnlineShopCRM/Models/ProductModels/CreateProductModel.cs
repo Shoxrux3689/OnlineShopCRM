@@ -1,6 +1,5 @@
-﻿namespace OnlineShopCRM.Models.ProductModels
+﻿namespace OnlineShopCRM.Models.ProductModels;
+
+public class CreateProductModel
 {
-    public class CreateProductModel
-    {
-    }
 }

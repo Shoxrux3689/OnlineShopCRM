@@ -20,7 +20,7 @@ public class OrdersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateOrder(int customerId, CreateOrder createOrder)
+    public async Task<IActionResult> CreateOrder(int customerId, CreateOrderModel createOrder)
     {
         try
         {
@@ -68,7 +68,7 @@ public class OrdersController : ControllerBase
     }
 
     [HttpPut("{orderId}")]
-    public async Task<IActionResult> UpdateOrder(int customerId, int orderId, UpdateOrder updateOrder)
+    public async Task<IActionResult> UpdateOrder(int customerId, int orderId, UpdateOrderModel updateOrder)
     {
         try
         {

@@ -29,12 +29,14 @@ public class OrderRepository : IOrderRepository
 
     public async Task<List<Order>?> GetOrdersByCustomerId(int customerId)
     {
-        var orders = await _appDbContext.Orders.Where(s => s.CustomerId == customerId).ToListAsync();
+        var orders = await _appDbContext.Orders.Where(s => s.CustomerId == customerId).Take(20).ToListAsync();
         return orders;
     }
 
+
     public async Task<List<Order>?> GetOrdersByFilter(OrderFilter filter)
     {
+        /*
         var query = _appDbContext.Orders.Include(s => s.Customer).AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(filter.Name))
@@ -60,13 +62,13 @@ public class OrderRepository : IOrderRepository
 
         if (filter.FromPrice == null && filter.ToPrice != null)
             query = query.Where(s => s.Price <= filter.ToPrice);
-
+        */
         return await query.ToListAsync();
     }
 
-    public async Task UpdateOrder(Order Order)
+    public async Task UpdateOrder(Order order)
     {
-        _appDbContext.Orders.Update(Order);
+        _appDbContext.Orders.Update(order);
         await _appDbContext.SaveChangesAsync();
     }
 }
