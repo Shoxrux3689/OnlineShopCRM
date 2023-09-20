@@ -27,13 +27,13 @@ public class CustomerRepository : ICustomerRepository
         var query = _dbContext.Customers.AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(customerFilter.FirstName))
-            query = query.Where(c => c.FirstName.Contains(customerFilter.FirstName));
+            query = query.Where(c => c.FirstName!.Contains(customerFilter.FirstName));
 
         if (!string.IsNullOrWhiteSpace(customerFilter.LastName))
-            query = query.Where(c => c.LastName.Contains(customerFilter.LastName));
+            query = query.Where(c => c.LastName!.Contains(customerFilter.LastName));
 
         if (!string.IsNullOrWhiteSpace(customerFilter.Address))
-            query = query.Where(c => c.Address.Contains(customerFilter.Address));
+            query = query.Where(c => c.Address!.Contains(customerFilter.Address));
 
         if (!string.IsNullOrWhiteSpace(customerFilter.PhoneNumber))
             query = query.Where(c => c.PhoneNumber.Contains(customerFilter.PhoneNumber));
