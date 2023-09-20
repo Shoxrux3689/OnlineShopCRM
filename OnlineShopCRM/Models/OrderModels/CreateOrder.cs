@@ -4,8 +4,11 @@ namespace OnlineShopCRM.Models.OrderModels;
 
 public class CreateOrder
 {
-    public required string Name { get; set; }
-    public int CustomerId { get; set; }
-    public required DateOnly SaleDate { get; set; }
-    public required long Price { get; set; }
+    public bool IsActive { get; set; }
+    public bool IsPay { get; set; }
+    public bool IsCancel { get; set; }
+    public long Residual { get; set; }
+    public required DateOnly OrderDate { get; set; }
+    public DateOnly DeliveryDate { get; set; }
+    public string? Description { get; set; }
 }
