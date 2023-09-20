@@ -6,7 +6,7 @@ namespace OnlineShopCRM.Repositories.Interfaces;
 
 public interface IProductRepository
 {
-    Task<int> CreateProduct(CreateProductModel createProductModel);
+    Task<int> CreateProduct(Product product);
     Task<Product?> GetProductById(int id);
     Task<List<Product>?> GetProductsByFilter(ProductFilter productFilter);
     Task UpdateProduct(Product product);

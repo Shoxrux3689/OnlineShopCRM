@@ -12,7 +12,6 @@ namespace OnlineShopCRM.Repositories;
 public class ProductRepository : IProductRepository
 {
     private readonly AppDbContext _context;
-    private readonly IUserProvider _userProvider;
 
     public ProductRepository(AppDbContext context, IUserProvider userProvider)
     {
@@ -20,11 +19,8 @@ public class ProductRepository : IProductRepository
         _userProvider = userProvider;
     }
 
-    public async Task<int> CreateProduct(CreateProductModel createProductModel)
+    public async Task<int> CreateProduct(Product product)
     {
-        var product = createProductModel.Adapt<Product>();
-        product.UserId = _userProvider.UserId;
-
         _context.Products.Add(product);
         await _context.SaveChangesAsync();
 
@@ -33,9 +29,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<Product?> GetProductById(int id)
     {
-        var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
-        
-        return product;
+        return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public Task<List<Product>?> GetProductsByFilter(ProductFilter productFilter)
@@ -45,14 +39,6 @@ public class ProductRepository : IProductRepository
 
     public async Task UpdateProduct(Product product)
     {
-        var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
-        if (product == null)
-        {
-            throw new Exception("Product is not found!");
-        }
-
-        product = updateProductModel.Adapt<Product>();
-
         _context.Update(product);
         await _context.SaveChangesAsync();
     }
