@@ -8,4 +8,5 @@ public class User
     public string PasswordHash { get; set; }
     public required string PhoneNumber { get; set; }
     public List<Customer>? Customers { get; set; }
+    public List<Order>? Orders { get; set; }
 }
