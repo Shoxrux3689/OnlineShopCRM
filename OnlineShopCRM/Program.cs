@@ -31,6 +31,8 @@ builder.Services.AddScoped<ITokenManager, JwtBearerTokenManager>();
 builder.Services.AddScoped<IUserManager, UserManager>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserProvider, UserProvider>();
+builder.Services.AddScoped<IProductManager, ProductManager>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddJwt(builder.Configuration);
