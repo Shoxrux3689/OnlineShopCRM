@@ -11,4 +11,5 @@ public class CreateOrderModel
     public required DateOnly OrderDate { get; set; }
     public DateOnly DeliveryDate { get; set; }
     public string? Description { get; set; }
+    public required List<int> ProductsId { get; set; }
 }

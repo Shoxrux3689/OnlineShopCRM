@@ -10,6 +10,6 @@ public class UpdateOrderModel
     public long Residual { get; set; }
     public required DateOnly OrderDate { get; set; }
     public DateOnly DeliveryDate { get; set; }
-    public int ProductId { get; set; }
+    public required List<int> ProductsId { get; set; }
     public string? Description { get; set; }
 }
