@@ -36,11 +36,11 @@ public class OrderRepository : IOrderRepository
 
     public async Task<List<Order>?> GetOrdersByFilter(OrderFilter filter)
     {
-        /*
-        var query = _appDbContext.Orders.Include(s => s.Customer).AsQueryable();
+        
+        var query = _appDbContext.Orders.AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(filter.Name))
-            query = query.Where(s => s.Name.Contains(filter.Name));
+            query = query.Where(s => s.Product!.Name.Contains(filter.Name));
 
         if (!string.IsNullOrWhiteSpace(filter.CustomerPhoneNumber))
             query = query.Where(s => s.Customer!.PhoneNumber.Contains(filter.CustomerPhoneNumber));
@@ -62,7 +62,7 @@ public class OrderRepository : IOrderRepository
 
         if (filter.FromPrice == null && filter.ToPrice != null)
             query = query.Where(s => s.Price <= filter.ToPrice);
-        */
+        
         return await query.ToListAsync();
     }
 

@@ -11,7 +11,6 @@ public class Order
     public long Residual { get; set; }
     public required DateOnly OrderDate { get; set; }
     public DateOnly DeliveryDate { get; set; }
-    public Product? Product { get; set; }
-    public int ProductId { get; set; }
     public string? Description { get; set; }
+    public List<OrderProduct>? OrderProducts { get; set; }
 }
