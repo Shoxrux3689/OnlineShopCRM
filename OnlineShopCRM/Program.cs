@@ -33,6 +33,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserProvider, UserProvider>();
 builder.Services.AddScoped<IProductManager, ProductManager>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICustomerProductRepository, CustomerProductRepository>();
+builder.Services.AddScoped<IOrderProductManager, OrderProductManager>();
+builder.Services.AddScoped<IOrderProductRepository, OrderProductRepository>();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddJwt(builder.Configuration);

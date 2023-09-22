@@ -39,29 +39,29 @@ public class OrderRepository : IOrderRepository
         
         var query = _appDbContext.Orders.AsQueryable();
 
-        if (!string.IsNullOrWhiteSpace(filter.Name))
-            query = query.Where(s => s.Product!.Name.Contains(filter.Name));
+        if (!string.IsNullOrWhiteSpace(filter.ProductName))
+            query = query.Where(o => o.OrderProducts!.Any(o => o.Product!.Name.Contains(filter.ProductName)));
 
         if (!string.IsNullOrWhiteSpace(filter.CustomerPhoneNumber))
-            query = query.Where(s => s.Customer!.PhoneNumber.Contains(filter.CustomerPhoneNumber));
+            query = query.Where(o => o.Customer!.PhoneNumber.Contains(filter.CustomerPhoneNumber));
 
         if (filter.FromDate != null && filter.ToDate != null)
-            query = query.Where(s => s.OrderDate > filter.FromDate && s.OrderDate <= filter.ToDate);
+            query = query.Where(o => o.OrderDate > filter.FromDate && o.OrderDate <= filter.ToDate);
         
         if (filter.FromDate != null && filter.ToDate == null)
-            query = query.Where(s => s.OrderDate > filter.FromDate);
+            query = query.Where(o => o.OrderDate > filter.FromDate);
 
         if (filter.FromDate == null && filter.ToDate != null)
-            query = query.Where(s => s.OrderDate < filter.ToDate);
+            query = query.Where(o => o.OrderDate < filter.ToDate);
 
         if (filter.FromPrice != null && filter.ToPrice != null)
-            query = query.Where(s => s.Price > filter.FromPrice && s.Price <= filter.ToPrice);
+            query = query.Where(o => o.Summary > filter.FromPrice && o.Summary <= filter.ToPrice);
         
         if (filter.FromPrice != null && filter.ToPrice == null)
-            query = query.Where(s => s.Price > filter.FromPrice);
+            query = query.Where(o => o.Summary > filter.FromPrice);
 
         if (filter.FromPrice == null && filter.ToPrice != null)
-            query = query.Where(s => s.Price <= filter.ToPrice);
+            query = query.Where(o => o.Summary <= filter.ToPrice);
         
         return await query.ToListAsync();
     }

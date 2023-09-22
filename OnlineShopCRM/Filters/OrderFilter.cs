@@ -4,7 +4,7 @@ namespace OnlineShopCRM.Filters;
 
 public class OrderFilter
 {
-    public string? Name { get; set; }
+    public string? ProductName { get; set; }
     public string? CustomerPhoneNumber { get; set; }
     public DateOnly? FromDate { get; set; }
     public DateOnly? ToDate { get; set; }
