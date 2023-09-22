@@ -29,9 +29,10 @@ public class ProductManager : IProductManager
         return product.Id;
     }
 
-    public Task<List<Product>?> GetProductByFilter(ProductFilter productFilter)
+    public async Task<List<Product>?> GetProductByFilter(ProductFilter productFilter)
     {
-        throw new NotImplementedException();
+        var products = await _productRepository.GetProductsByFilter(productFilter);
+        return products;
     }
 
     public async Task<Product?> GetProductById(int productId)

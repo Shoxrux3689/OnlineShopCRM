@@ -14,12 +14,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     options.UseInMemoryDatabase("MyDb");
     //options.UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"));
 });
+
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerManager, CustomerManager>();

@@ -2,5 +2,5 @@
 
 public class ProductFilter
 {
-
+    public string? ProductName { get; set; }
 }
