@@ -33,7 +33,7 @@ public class ProductRepository : IProductRepository
 
     public Task<List<Product>?> GetProductsByFilter(ProductFilter productFilter)
     {
-        throw new NotImplementedException();
+
     }
 
     public async Task UpdateProduct(Product product)

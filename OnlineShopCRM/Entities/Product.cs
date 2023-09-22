@@ -9,4 +9,5 @@ public class Product
     public User? User { get; set; }
     public int UserId { get; set; }
     public List<OrderProduct>? OrderProducts { get; set; }
+    public List<CustomerProduct>? CustomerProducts { get; set; }
 }
