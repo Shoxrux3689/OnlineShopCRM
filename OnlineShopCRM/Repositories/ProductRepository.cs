@@ -31,9 +31,10 @@ public class ProductRepository : IProductRepository
         return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public Task<List<Product>?> GetProductsByFilter(ProductFilter productFilter)
+    public async Task<List<Product>?> GetProductsByFilter(ProductFilter productFilter)
     {
-
+        var query = await _context.Products.ToListAsync();
+        return query;
     }
 
     public async Task UpdateProduct(Product product)
