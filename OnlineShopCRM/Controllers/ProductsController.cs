@@ -51,7 +51,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetProductByFilter(ProductFilter productFilter)
+    public async Task<IActionResult> GetProductByFilter([FromQuery]ProductFilter productFilter)
     {
         try
         {

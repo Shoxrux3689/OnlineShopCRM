@@ -33,6 +33,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<Product>?> GetProductsByFilter(ProductFilter productFilter)
     {
+        //qilinmagan hali
         var query = await _context.Products.ToListAsync();
         return query;
     }
