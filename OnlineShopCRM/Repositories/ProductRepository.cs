@@ -13,10 +13,9 @@ public class ProductRepository : IProductRepository
 {
     private readonly AppDbContext _context;
 
-    public ProductRepository(AppDbContext context, IUserProvider userProvider)
+    public ProductRepository(AppDbContext context)
     {
         _context = context;
-        _userProvider = userProvider;
     }
 
     public async Task<int> CreateProduct(Product product)
