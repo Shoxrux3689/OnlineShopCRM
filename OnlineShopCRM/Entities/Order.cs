@@ -13,7 +13,7 @@ public class Order
     public long Residual { get; set; }
     public long Summary { get; set; }
     public required DateOnly OrderDate { get; set; }
-    public DateOnly DeliveryDate { get; set; }
+    public DateOnly? DeliveryDate { get; set; }
     public string? Description { get; set; }
     public List<OrderProduct>? OrderProducts { get; set; }
 }
