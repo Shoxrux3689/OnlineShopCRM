@@ -14,14 +14,17 @@ public class OrderManager : IOrderManager
     private readonly IOrderRepository _orderRepository;
     private readonly ICustomerRepository _customerRepository;
     private readonly IUserProvider _userProvider;
+    private readonly ICustomerProductRepository _customerProductRepository;
     public OrderManager(
         IOrderRepository orderRepository, 
         ICustomerRepository customerRepository,
-        IUserProvider userProvider)
+        IUserProvider userProvider,
+        ICustomerProductRepository customerProductRepository)
     {
         _orderRepository = orderRepository;
         _customerRepository = customerRepository;
         _userProvider = userProvider;
+        _customerProductRepository = customerProductRepository;
     }
 
     public async Task CreateOrder(int customerId, CreateOrderModel createOrder)
@@ -71,6 +74,8 @@ public class OrderManager : IOrderManager
             throw new Exception("Order is not found");
         
         order = updateOrder.Adapt<Order>();
+
+        await _customerProductRepository.AddCustomerProduct(customerId, orderId);
 
         await _orderRepository.UpdateOrder(order);
     }
