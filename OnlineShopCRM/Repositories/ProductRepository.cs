@@ -33,9 +33,21 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<Product>?> GetProductsByFilter(ProductFilter productFilter)
     {
-        //qilinmagan hali
-        var query = await _context.Products.ToListAsync();
-        return query;
+        var query = _context.Products.AsQueryable();
+
+        if (productFilter.ProductName != null)
+            query = query.Where(p => p.Name.Contains(productFilter.ProductName));
+
+        if (productFilter.FromProductPrice != null && productFilter.FromProductPrice != null)
+            query = query.Where(p => p.Price > productFilter.FromProductPrice && p.Price <= productFilter.ToProductPrice);
+
+        if (productFilter.FromProductPrice != null && productFilter.FromProductPrice == null)
+            query = query.Where(p => p.Price > productFilter.FromProductPrice);
+
+        if (productFilter.FromProductPrice == null && productFilter.FromProductPrice != null)
+            query = query.Where(p => p.Price <= productFilter.ToProductPrice);
+
+        return await query.ToListAsync();
     }
 
     public async Task UpdateProduct(Product product)
