@@ -53,19 +53,6 @@ public class OrdersController : ControllerBase
         return Ok(orders);
     }
 
-    [HttpGet("filter")]
-    public async Task<IActionResult> GetOrdersByFilter(OrderFilter orderFilter)
-    {
-        try
-        {
-            var orders = await _orderManager.GetOrdersByFilter(orderFilter);
-            return Ok(orders);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
 
     [HttpPut("{orderId}")]
     public async Task<IActionResult> UpdateOrder(int customerId, int orderId, UpdateOrderModel updateOrder)
