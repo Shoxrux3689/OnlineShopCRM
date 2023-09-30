@@ -17,7 +17,7 @@ public class ReportsController : ControllerBase
     }
 
     [HttpGet("orders")]
-    public async Task<IActionResult> GetOrdersByFilter(OrderFilter orderFilter)
+    public async Task<IActionResult> GetOrdersByFilter([FromQuery]OrderFilter orderFilter)
     {
         try
         {
